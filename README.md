@@ -1,1 +1,1 @@
-# planet-manager
+# plant-manager
