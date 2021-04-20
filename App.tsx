@@ -1,9 +1,11 @@
+import 'react-native-gesture-handler';
+
+import AppLoading from 'expo-app-loading';
 import React from 'react';
-import AppLoading from 'expo-app-loading'
 
 import { Jost_400Regular, Jost_600SemiBold, useFonts } from '@expo-google-fonts/jost';
 
-import { Welcome } from './src/pages/Welcome';
+import Routes from './src/routes/';
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
@@ -14,6 +16,6 @@ export default function App() {
   if (!fontsLoaded)
     return <AppLoading />
 
-  return <Welcome />
+  return <Routes />
 }
 
