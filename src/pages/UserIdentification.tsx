@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { useNavigation } from '@react-navigation/native';
+
 import { Button } from '../components/Button';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
 export function UserIdentification() {
+  const navigation = useNavigation()
+
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const [name, setName] = useState<string>();
@@ -22,6 +27,10 @@ export function UserIdentification() {
   function handleInputChange(value: string) {
     setIsFilled(!!value);
     setName(value);
+  }
+
+  function handleSubmit() {
+    navigation.navigate('Confirmation');
   }
 
   return (
@@ -55,7 +64,7 @@ export function UserIdentification() {
             />
 
             <View style={styles.footer}>
-              <Button />
+              <Button title="Confirmar" onPress={handleSubmit} />
             </View>
 
           </View>
