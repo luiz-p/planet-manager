@@ -30,10 +30,19 @@ interface PlatProps {
 export function PlantSelect() {
   const [environments, setEnvironments] = useState<EnvironmentsProps[]>([]);
   const [plants, setPants] = useState<PlatProps[]>([]);
+  const [filteredPlants, setFilteredPlants] = useState<PlatProps[]>([]);
   const [environmentSelected, setEnvironmentSelected] = useState('all');
 
   function handleEnvironmentSelected(environment: string) {
-    setEnvironmentSelected(environment)
+    setEnvironmentSelected(environment);
+
+    if (environment === 'all') return setFilteredPlants(plants);
+
+    const filtered = plants.filter(plant =>
+      plant.environments.includes(environment)    
+    );
+
+    setFilteredPlants(filtered);
   }
 
   useEffect(() => {
@@ -85,7 +94,7 @@ export function PlantSelect() {
 
       <View style={styles.plants}>
         <FlatList
-          data={plants}
+          data={filteredPlants}
           showsVerticalScrollIndicator={false}
           numColumns={2}
           renderItem={({ item }) => (<PlantCardPrimary data={item} />)}
