@@ -108,6 +108,7 @@ export function PlantSelect() {
       <View>
         <FlatList
           data={environments}
+          keyExtractor={(item) => String(item.key)}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.enviromentList}
@@ -124,6 +125,7 @@ export function PlantSelect() {
       <View style={styles.plants}>
         <FlatList
           data={filteredPlants}
+          keyExtractor={(item) => String(item.id)}
           renderItem={({ item }) => (<PlantCardPrimary data={item} />)}
           showsVerticalScrollIndicator={false}
           numColumns={2}
