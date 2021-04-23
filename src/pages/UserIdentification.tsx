@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import {
-    Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableWithoutFeedback,
-    View
+    Alert, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput,
+    TouchableWithoutFeedback, View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 import { Button } from '../components/Button';
@@ -32,7 +33,11 @@ export function UserIdentification() {
     setName(value);
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
+    if(!name) return Alert.alert('Me diz como chamar você 😢');
+
+    await AsyncStorage.setItem('@plantmanager:user', name);
+
     navigation.navigate('Confirmation');
   }
 
