@@ -6,11 +6,11 @@ import {
 import { SvgFromUri } from 'react-native-svg';
 
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import waterdrop from '../assets/waterdrop.png';
 import { Button } from '../components/Button';
-import { PlantProps } from '../libs/stotage';
+import { PlantProps, savePlant } from '../libs/stotage';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
@@ -19,6 +19,7 @@ interface Params {
 }
 
 export function PlantSave() {
+  const navigation = useNavigation();
   const route = useRoute();
   const { plant } = route.params as Params; 
 
@@ -40,6 +41,24 @@ export function PlantSave() {
 
   function handleOpenDateTimePickerForAndroid() {
     setShowDatePicker(oldState => !oldState);
+  }
+
+  async function handleSave() {
+    try {
+      await savePlant({
+        ...plant, dateFormatNotification: selectedDateTime
+      });
+
+      navigation.navigate('Confirmation', {
+        title: 'Tudo certo',
+        subtitle: `Fique tranquilo que sempre vamos${'\n'}lembrar você de cuidar da sua plantinha${'\n'}com bastante amor.`,
+        buttonTitle: 'Muito obrigado :D',
+        icon: 'hug',
+        nextScreen: 'MyPlants',
+      });
+    } catch (error) {
+      Alert.alert('Não foi possível salvar. 😢');
+    }
   }
 
   return(
@@ -84,7 +103,7 @@ export function PlantSave() {
           </TouchableOpacity>
         )}
         
-        <Button title="Cadastrar planta" onPress={() => {}} />
+        <Button title="Cadastrar planta" onPress={handleSave} />
       </View>
     </View>
   );
