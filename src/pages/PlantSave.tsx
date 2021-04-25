@@ -10,7 +10,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import waterdrop from '../assets/waterdrop.png';
 import { Button } from '../components/Button';
-import { PlantProps, savePlant } from '../libs/stotage';
+import { PlantProps, savePlant } from '../libs/storage';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
@@ -46,7 +46,7 @@ export function PlantSave() {
   async function handleSave() {
     try {
       await savePlant({
-        ...plant, dateFormatNotification: selectedDateTime
+        ...plant, dateTimeNotification: selectedDateTime
       });
 
       navigation.navigate('Confirmation', {
