@@ -5,6 +5,7 @@ import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 
 import waterdrop from '../assets/waterdrop.png';
 import { Header } from '../components/Header';
+import { Load } from '../components/Load';
 import { PlantCardSecondary } from '../components/PlantCardSecondary';
 import { loadPlant, PlantProps } from '../libs/storage';
 import colors from '../styles/colors';
@@ -32,6 +33,8 @@ export function MyPlants() {
     }
     loadStorageData();
   }, []);
+
+  if (loading) return <Load />
 
   return (
     <View style={styles.container}>
