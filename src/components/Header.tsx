@@ -6,15 +6,15 @@ import userImg from '../assets/luiz.jpeg';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
-export function Header () {
+export function Header() {
   const [userName, setUserName] = useState<string>();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       const user = await AsyncStorage.getItem('@plantmanager:user');
-      setUserName(user || 'usuário')
-    })()
-  }, [])
+      setUserName(user || 'usuário');
+    })();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -25,7 +25,7 @@ export function Header () {
 
       <Image source={userImg} style={styles.image} />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -52,5 +52,5 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 35,
-  }
+  },
 });

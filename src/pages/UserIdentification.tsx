@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import {
-    Alert, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput,
-    TouchableWithoutFeedback, View
+  Alert,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -13,7 +20,7 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
 export function UserIdentification() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -21,7 +28,7 @@ export function UserIdentification() {
 
   function handleInputBlur() {
     setIsFocused(false);
-    setIsFilled(!!name)
+    setIsFilled(!!name);
   }
 
   function handleInputFocus() {
@@ -34,7 +41,7 @@ export function UserIdentification() {
   }
 
   async function handleSubmit() {
-    if(!name) return Alert.alert('Me diz como chamar você 😢');
+    if (!name) return Alert.alert('Me diz como chamar você 😢');
 
     try {
       await AsyncStorage.setItem('@plantmanager:user', name);
@@ -60,9 +67,7 @@ export function UserIdentification() {
           <View style={styles.content}>
             <View style={styles.form}>
               <View style={styles.header}>
-                <Text style={styles.emoji}>
-                  { isFilled ? '😄' : '😃' }
-                </Text>
+                <Text style={styles.emoji}>{isFilled ? '😄' : '😃'}</Text>
 
                 <Text style={styles.title}>
                   Como podemos {'\n'}
@@ -73,7 +78,7 @@ export function UserIdentification() {
               <TextInput
                 style={[
                   styles.input,
-                  (isFocused || isFilled) && {borderColor: colors.green}
+                  (isFocused || isFilled) && { borderColor: colors.green },
                 ]}
                 placeholder="Digite um nome"
                 onBlur={handleInputBlur}
@@ -84,13 +89,12 @@ export function UserIdentification() {
               <View style={styles.footer}>
                 <Button title="Confirmar" onPress={handleSubmit} />
               </View>
-
             </View>
           </View>
         </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>  
+      </KeyboardAvoidingView>
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -139,4 +143,4 @@ const styles = StyleSheet.create({
     marginTop: 40,
     paddingHorizontal: 15,
   },
-})
+});

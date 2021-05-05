@@ -10,24 +10,17 @@ interface EnvironmentButtonProps extends RectButtonProps {
   active?: boolean;
 }
 
-export function EnvironmentButton ({
+export function EnvironmentButton({
   title,
   active = false,
   ...rest
 }: EnvironmentButtonProps) {
-
   return (
     <RectButton
-      style={[
-        styles.container,
-        active && styles.containerActive
-      ]}
-      { ...rest }
+      style={[styles.container, active && styles.containerActive]}
+      {...rest}
     >
-      <Text style={[
-        styles.text,
-        active && styles.textActive
-      ]}>{ title }</Text>
+      <Text style={[styles.text, active && styles.textActive]}>{title}</Text>
     </RectButton>
   );
 }
@@ -35,7 +28,7 @@ export function EnvironmentButton ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.shape,
-    width: 76,    
+    width: 76,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
@@ -52,5 +45,5 @@ const styles = StyleSheet.create({
   textActive: {
     fontFamily: fonts.heading,
     color: colors.green_dark,
-  }
+  },
 });

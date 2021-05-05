@@ -1,5 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native';
 
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
@@ -13,7 +18,7 @@ export function Button({ title, ...rest }: ButtonProps) {
     <TouchableOpacity style={styles.container} {...rest}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -29,4 +34,4 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontFamily: fonts.heading,
   },
-})
+});

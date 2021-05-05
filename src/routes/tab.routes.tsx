@@ -9,48 +9,42 @@ import colors from '../styles/colors';
 
 const AppTab = createBottomTabNavigator();
 
-const AuthRoutes = () => {
-  return (
-    <AppTab.Navigator
-      tabBarOptions={{
-        activeTintColor: colors.green,
-        inactiveTintColor: colors.heading,
-        labelPosition: 'beside-icon',
-        style: {
-          paddingVertical: 20,
-          height: 88,
-        }
+const AuthRoutes = () => (
+  <AppTab.Navigator
+    tabBarOptions={{
+      activeTintColor: colors.green,
+      inactiveTintColor: colors.heading,
+      labelPosition: 'beside-icon',
+      style: {
+        paddingVertical: 20,
+        height: 88,
+      },
+    }}
+  >
+    <AppTab.Screen
+      name="Nova Planta"
+      component={PlantSelect}
+      options={{
+        tabBarIcon: ({ size, color }) => (
+          <MaterialIcons name="add-circle-outline" size={size} color={color} />
+        ),
       }}
-    >
-      <AppTab.Screen
-        name="Nova Planta"
-        component={PlantSelect}
-        options={{
-          tabBarIcon: (({ size, color }) => (
-            <MaterialIcons
-              name="add-circle-outline"
-              size={size}
-              color={color}
-            />
-          ))
-        }}
-      />
+    />
 
-      <AppTab.Screen
-        name="Minhas Plantas"
-        component={MyPlants}
-        options={{
-          tabBarIcon: (({ size, color }) => (
-            <MaterialIcons
-              name="format-list-bulleted"
-              size={size}
-              color={color}
-            />
-          ))
-        }}
-      />
-    </AppTab.Navigator>
-  )
-}
+    <AppTab.Screen
+      name="Minhas Plantas"
+      component={MyPlants}
+      options={{
+        tabBarIcon: ({ size, color }) => (
+          <MaterialIcons
+            name="format-list-bulleted"
+            size={size}
+            color={color}
+          />
+        ),
+      }}
+    />
+  </AppTab.Navigator>
+);
 
 export default AuthRoutes;

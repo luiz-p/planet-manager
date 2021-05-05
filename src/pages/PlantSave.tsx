@@ -1,7 +1,7 @@
 import { format, isBefore } from 'date-fns';
 import React, { useState } from 'react';
 import {
-    Alert, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View
+  Alert, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import { SvgFromUri } from 'react-native-svg';
 
@@ -21,14 +21,14 @@ interface Params {
 export function PlantSave() {
   const navigation = useNavigation();
   const route = useRoute();
-  const { plant } = route.params as Params; 
+  const { plant } = route.params as Params;
 
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios');
 
   function handleChangeTime(event: Event, dateTime: Date | undefined) {
     if (Platform.OS === 'android') {
-      setShowDatePicker(oldValue => !oldValue);
+      setShowDatePicker((oldValue) => !oldValue);
     }
 
     if (dateTime && isBefore(dateTime, new Date())) {
@@ -40,13 +40,13 @@ export function PlantSave() {
   }
 
   function handleOpenDateTimePickerForAndroid() {
-    setShowDatePicker(oldState => !oldState);
+    setShowDatePicker((oldState) => !oldState);
   }
 
   async function handleSave() {
     try {
       await savePlant({
-        ...plant, dateTimeNotification: selectedDateTime
+        ...plant, dateTimeNotification: selectedDateTime,
       });
 
       navigation.navigate('Confirmation', {
@@ -61,12 +61,12 @@ export function PlantSave() {
     }
   }
 
-  return(
+  return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.container}
     >
-        <View style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.plantInfo}>
           <SvgFromUri
             uri={plant.photo}
@@ -90,11 +90,12 @@ export function PlantSave() {
 
           {showDatePicker && (
             <DateTimePicker
-            value={selectedDateTime}
-            mode="time"
-            display="spinner"
-            onChange={handleChangeTime}
-          />)}
+              value={selectedDateTime}
+              mode="time"
+              display="spinner"
+              onChange={handleChangeTime}
+            />
+          )}
 
           {Platform.OS === 'android' && (
             <TouchableOpacity
@@ -106,7 +107,7 @@ export function PlantSave() {
               </Text>
             </TouchableOpacity>
           )}
-          
+
           <Button title="Cadastrar planta" onPress={handleSave} />
         </View>
       </View>

@@ -19,7 +19,7 @@ interface Params {
 const emojis = {
   hug: '🤗',
   smile: '😄',
-}
+};
 
 export function Confirmation() {
   const navigation = useNavigation();
@@ -42,20 +42,16 @@ export function Confirmation() {
       <View style={styles.content}>
         <Text style={styles.emoji}>{emojis[icon]}</Text>
 
-        <Text style={styles.title}>
-          {title}
-        </Text>
+        <Text style={styles.title}>{title}</Text>
 
-        <Text style={styles.subtitle}>
-          {subtitle}
-        </Text>
+        <Text style={styles.subtitle}>{subtitle}</Text>
 
         <View style={styles.footer}>
           <Button title={buttonTitle} onPress={handleMoveOn} />
         </View>
       </View>
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -93,4 +89,4 @@ const styles = StyleSheet.create({
     marginTop: 35,
     paddingHorizontal: 72,
   },
-})
+});

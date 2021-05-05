@@ -1,5 +1,11 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Feather } from '@expo/vector-icons';
@@ -27,8 +33,8 @@ export function Welcome() {
       <Image source={wateringImg} style={styles.image} resizeMode="contain" />
 
       <Text style={styles.subtitle}>
-        Não esqueça mais de regar suas plantas.
-        Nós cuidamos de lembrar você sempre que precisar.
+        Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você
+        sempre que precisar.
       </Text>
 
       <TouchableOpacity
@@ -39,7 +45,7 @@ export function Welcome() {
         <Feather name="chevron-right" style={styles.buttonIcon} />
       </TouchableOpacity>
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -78,5 +84,5 @@ const styles = StyleSheet.create({
   buttonIcon: {
     fontSize: 26,
     color: colors.white,
-  }
-})
+  },
+});

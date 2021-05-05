@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useNavigation } from '@react-navigation/native';
@@ -36,14 +42,16 @@ export function PlantSelect() {
     if (environment === 'all') return setFilteredPlants(plants);
 
     const filtered = plants.filter(plant =>
-      plant.environments.includes(environment)    
+      plant.environments.includes(environment),
     );
 
     setFilteredPlants(filtered);
   }
 
   async function fetchPlants() {
-    const { data } = await api.get(`plants?_sort=name&_order=asc&_page=${page}&_limit=8`);
+    const { data } = await api.get(
+      `plants?_sort=name&_order=asc&_page=${page}&_limit=8`,
+    );
 
     if (!data) return setLoading(true);
 
@@ -54,18 +62,18 @@ export function PlantSelect() {
       setPlants(data);
       setFilteredPlants(data);
     }
-    
+
     setLoading(false);
     setLoadingMore(false);
   }
 
   function handleFetchMore(distance: number) {
-    if(distance < 1) return;
+    if (distance < 1) return;
 
     setLoadingMore(true);
     setPage(oldValue => oldValue + 1);
     fetchPlants();
-  }  
+  }
 
   function handlePlantSelect(plant: PlantProps) {
     navigation.navigate('PlantSave', { plant });
@@ -73,23 +81,20 @@ export function PlantSelect() {
 
   useEffect(() => {
     async function fetchEnvironment() {
-      const { data } = await api
-        .get('plants_environments?_sort=title&_order=asc');
-      setEnvironments([
-        { key: 'all', title: 'Todos'},
-        ...data
-      ]);
+      const { data } = await api.get(
+        'plants_environments?_sort=title&_order=asc',
+      );
+      setEnvironments([{ key: 'all', title: 'Todos' }, ...data]);
     }
 
     fetchEnvironment();
-  }, [])
+  }, []);
 
   useEffect(() => {
     fetchPlants();
-  }, [])
+  }, []);
 
-
-  if (loading) return <Load />
+  if (loading) return <Load />;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -103,14 +108,14 @@ export function PlantSelect() {
       <View>
         <FlatList
           data={environments}
-          keyExtractor={(item) => String(item.key)}
+          keyExtractor={item => String(item.key)}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.enviromentList}
           renderItem={({ item }) => (
             <EnvironmentButton
-              title={ item.title }
-              active={ item.key === environmentSelected }
+              title={item.title}
+              active={item.key === environmentSelected}
               onPress={() => handleEnvironmentSelected(item.key)}
             />
           )}
@@ -120,7 +125,7 @@ export function PlantSelect() {
       <View style={styles.plants}>
         <FlatList
           data={filteredPlants}
-          keyExtractor={(item) => String(item.id)}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
             <PlantCardPrimary
               data={item}
@@ -134,16 +139,12 @@ export function PlantSelect() {
             handleFetchMore(distanceFromEnd)
           }
           ListFooterComponent={
-            loadingMore
-            ? <ActivityIndicator color={colors.green} />
-            : <></>
+            loadingMore ? <ActivityIndicator color={colors.green} /> : <></>
           }
         />
       </View>
-
-      
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -172,11 +173,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 5,
     paddingHorizontal: 32,
-    marginVertical: 32
+    marginVertical: 32,
   },
   plants: {
     flex: 1,
     paddingHorizontal: 32,
     justifyContent: 'center',
   },
-})
+});

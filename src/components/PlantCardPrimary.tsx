@@ -10,22 +10,16 @@ interface PlantProps extends RectButtonProps {
   data: {
     name: string;
     photo: string;
-  }
+  };
 }
 
-export const PlantCardPrimary = ({ data, ...rest }: PlantProps) => {
-  return (
-    <RectButton
-      style={styles.container}
-      { ...rest }
-    >
-      <SvgFromUri uri={data.photo} width={70} height={70} />
+export const PlantCardPrimary = ({ data, ...rest }: PlantProps) => (
+  <RectButton style={styles.container} {...rest}>
+    <SvgFromUri uri={data.photo} width={70} height={70} />
 
-      <Text style={styles.text}>{ data.name }</Text>
-
-    </RectButton>
-  )
-}
+    <Text style={styles.text}>{data.name}</Text>
+  </RectButton>
+);
 
 const styles = StyleSheet.create({
   container: {
