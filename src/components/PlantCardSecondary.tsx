@@ -11,23 +11,19 @@ interface PlantProps extends RectButtonProps {
     name: string;
     photo: string;
     hour: string;
-  }
+  };
 }
 
 export const PlantCardSecondary = ({ data, ...rest }: PlantProps) => (
-  <RectButton
-    style={styles.container}
-    {...rest}
-  >
+  <RectButton style={styles.container} {...rest}>
     <SvgFromUri uri={data.photo} width={50} height={50} />
 
-    <Text style={styles.title}>{ data.name }</Text>
+    <Text style={styles.title}>{data.name}</Text>
 
     <View style={styles.details}>
       <Text style={styles.timeLabel}>Regar às</Text>
       <Text style={styles.time}>{data.hour}</Text>
     </View>
-
   </RectButton>
 );
 

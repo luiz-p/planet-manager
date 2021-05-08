@@ -11,16 +11,16 @@ export type PlantProps = {
   frequency: {
     times: number;
     repeat_every: string;
-  }
+  };
   dateTimeNotification: Date;
   hour: string;
-}
+};
 
 export type StoragePlantProps = {
   [id: string]: {
-    data: PlantProps
-  }
-}
+    data: PlantProps;
+  };
+};
 
 export async function savePlant(plant: PlantProps): Promise<void> {
   try {
@@ -48,14 +48,19 @@ export async function loadPlant(): Promise<PlantProps[]> {
     const plants = data ? (JSON.parse(data) as StoragePlantProps) : {};
 
     const sortedPlants = Object.keys(plants)
-      .map((plant) => ({
+      .map(plant => ({
         ...plants[plant].data,
-        hour: format(new Date(plants[plant].data.dateTimeNotification), 'HH:mm'),
+        hour: format(
+          new Date(plants[plant].data.dateTimeNotification),
+          'HH:mm',
+        ),
       }))
-      .sort((a, b) => Math.floor(
-        new Date(a.dateTimeNotification).getTime() / 1000
-            - Math.floor(new Date(b.dateTimeNotification).getTime() / 1000),
-      ));
+      .sort((a, b) =>
+        Math.floor(
+          new Date(a.dateTimeNotification).getTime() / 1000 -
+            Math.floor(new Date(b.dateTimeNotification).getTime() / 1000),
+        ),
+      );
 
     return sortedPlants;
   } catch (err) {

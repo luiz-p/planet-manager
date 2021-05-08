@@ -1,7 +1,14 @@
 import { format, isBefore } from 'date-fns';
 import React, { useState } from 'react';
 import {
-  Alert, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View,
+  Alert,
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { SvgFromUri } from 'react-native-svg';
 
@@ -28,7 +35,7 @@ export function PlantSave() {
 
   function handleChangeTime(event: Event, dateTime: Date | undefined) {
     if (Platform.OS === 'android') {
-      setShowDatePicker((oldValue) => !oldValue);
+      setShowDatePicker(oldValue => !oldValue);
     }
 
     if (dateTime && isBefore(dateTime, new Date())) {
@@ -40,13 +47,14 @@ export function PlantSave() {
   }
 
   function handleOpenDateTimePickerForAndroid() {
-    setShowDatePicker((oldState) => !oldState);
+    setShowDatePicker(oldState => !oldState);
   }
 
   async function handleSave() {
     try {
       await savePlant({
-        ...plant, dateTimeNotification: selectedDateTime,
+        ...plant,
+        dateTimeNotification: selectedDateTime,
       });
 
       navigation.navigate('Confirmation', {
@@ -68,11 +76,7 @@ export function PlantSave() {
     >
       <View style={styles.container}>
         <View style={styles.plantInfo}>
-          <SvgFromUri
-            uri={plant.photo}
-            height={150}
-            width={150}
-          />
+          <SvgFromUri uri={plant.photo} height={150} width={150} />
 
           <Text style={styles.plantName}>{plant.name}</Text>
 
@@ -86,7 +90,9 @@ export function PlantSave() {
             <Text style={styles.tipText}>{plant.water_tips}</Text>
           </View>
 
-          <Text style={styles.alertLabel}>Escoha o melhor horário para ser lembrado:</Text>
+          <Text style={styles.alertLabel}>
+            Escoha o melhor horário para ser lembrado:
+          </Text>
 
           {showDatePicker && (
             <DateTimePicker
